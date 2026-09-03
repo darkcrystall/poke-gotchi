@@ -1,37 +1,25 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { PaperProvider, MD3LightTheme } from "react-native-paper";
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { colors } from './palette/colors';
-
-export const theme = {
-  ...MD3LightTheme,
-  roundness: 4,
-  colors: {
-    ...MD3LightTheme.colors,
-    primary: colors.primary,
-    secondary: colors.secondary,
-  },
-};
+import { useState } from "react";
+import { PaperProvider } from "react-native-paper";
+import { theme } from "./src/palette/theme";
+import GamePage from "./src/pages/GamePage";
+import { IStarterConfig } from "./src/types/game";
+import { SelectStarterPage } from "./src/pages/SelectStarterPage";
 
 export default function App() {
+  const [starter, setStarter] = useState<IStarterConfig | null>(null);
+
   return (
-    <PaperProvider>
-      <SafeAreaProvider>
-        <SafeAreaView>
-
-        </SafeAreaView>
-      </SafeAreaProvider>
+    <PaperProvider theme={theme}>
+      {starter ? (
+        <GamePage
+          starter={starter}
+          onChangeStarter={() => setStarter(null)}
+        />
+      ) : (
+        <SelectStarterPage
+          onChooseStarter={setStarter}
+        />
+      )}
     </PaperProvider>
-
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
