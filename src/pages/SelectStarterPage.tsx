@@ -100,6 +100,7 @@ export function SelectStarterPage({ onChooseStarter }: SelectStarterPageProps) {
           // a especie é utilizada como chave única do componente, e pegamos os dados que vieram da api
           <CardPokemon
             key={starter.species}
+            starter={starter}
             pokemon={data}
             onChoose={() => onChooseStarter(starter)}
           />

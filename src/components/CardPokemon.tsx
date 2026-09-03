@@ -1,11 +1,12 @@
 import { Image, StyleSheet, View } from "react-native";
 import { Button, Card, Text } from "react-native-paper";
 
-import { IPokemonViewModel } from "../types/game";
+import { IPokemonViewModel, IStarterConfig } from "../types/game";
 import { capitalize, getTypeColor } from "../utils/pokemon";
 
 interface CardPokemonProps {
   pokemon: IPokemonViewModel;
+  starter: IStarterConfig;
 
   // para usar no game
   level?: number;
@@ -17,23 +18,26 @@ interface CardPokemonProps {
 
 export const CardPokemon = ({
   pokemon,
+  starter,
   level,
   experience,
   onChoose,
 }: CardPokemonProps) => {
+  const textColor = starter.accent;
   return (
     <Card
       style={[
         styles.card,
         {
           borderColor: getTypeColor(pokemon.type),
+          backgroundColor: starter.background
         },
       ]}
     >
       <Card.Content>
         <Image source={{ uri: pokemon.image }} style={styles.image} />
 
-        <Text variant="headlineSmall" style={styles.name}>
+        <Text variant="headlineSmall" style={[styles.name, {color: textColor}]}>
           {capitalize(pokemon.name)}
         </Text>
 
@@ -52,7 +56,7 @@ export const CardPokemon = ({
 
         {/* o botão só aparece quando onChoose for passado */}
         {onChoose && (
-          <Button mode="contained" onPress={onChoose} style={styles.button}>
+          <Button mode="elevated" onPress={onChoose} style={styles.button}>
             Escolher
           </Button>
         )}

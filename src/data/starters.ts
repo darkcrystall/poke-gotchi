@@ -1,3 +1,5 @@
+import { accentColors } from "../palette/accentColors";
+import { backgroundColors } from "../palette/backgroundColors";
 import { colors } from "../palette/colors";
 import { IStarterConfig } from "../types/game";
 
@@ -5,8 +7,8 @@ export const starters: IStarterConfig[] = [
   {
     label: "Bulbasaur",
     species: "bulbasaur",
-    accent: "#49A86E",
-    background: colors.primary,
+    accent: accentColors.bulbasaur,
+    background: backgroundColors.bulbasaur,
     evolutions: [
       { name: "ivysaur", minLevel: 16 },
       { name: "venusaur", minLevel: 32 },
@@ -15,8 +17,8 @@ export const starters: IStarterConfig[] = [
   {
     label: "Charmander",
     species: "charmander",
-    accent: "#F07D43",
-    background: colors.primary,
+    accent: accentColors.charmander,
+    background: backgroundColors.charmander,
     evolutions: [
       { name: "charmeleon", minLevel: 16 },
       { name: "charizard", minLevel: 36 },
@@ -25,8 +27,8 @@ export const starters: IStarterConfig[] = [
   {
     label: "Squirtle",
     species: "squirtle",
-    accent: "#4A92D6",
-    background: colors.primary,
+    accent: accentColors.squirtle,
+    background: backgroundColors.squirtle,
     evolutions: [
       { name: "wartortle", minLevel: 16 },
       { name: "blastoise", minLevel: 36 },
