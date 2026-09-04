@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Image, View } from "react-native";
+import { Image, View, StyleSheet } from "react-native";
 import { ActivityIndicator, Button, Card, Text } from "react-native-paper";
 
 // lista dos pokemons iniciais
@@ -11,6 +11,7 @@ import { IPokemonViewModel, IStarterConfig } from "../types/game";
 // função responsável por buscar os dados
 import { getPokemon } from "../services/pokeapi-service";
 import { CardPokemon } from "../components/CardPokemon";
+import { colors } from "../palette/colors";
 
 // define as propriedades que o componente recebe
 interface SelectStarterPageProps {
@@ -85,8 +86,8 @@ export function SelectStarterPage({ onChooseStarter }: SelectStarterPageProps) {
   }
 
   return (
-    <View style={{ padding: 16 }}>
-      <Text variant="headlineMedium">Escolha seu Pokémon</Text>
+    <View style={styles.container}> 
+      <Text style={styles.text} variant="headlineMedium">Escolha seu Pokémon!</Text>
 
       {/* percorre todos os pokemons */}
       {starters.map((starter) => {
@@ -109,3 +110,19 @@ export function SelectStarterPage({ onChooseStarter }: SelectStarterPageProps) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: colors.primary,
+  },
+  text: {
+    color: colors.text,
+    margin: 10,
+    textAlign: "center",
+    letterSpacing: 2,
+    fontWeight: "700",
+    fontFamily: ""
+  }
+});

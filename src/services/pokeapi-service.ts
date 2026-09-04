@@ -11,7 +11,7 @@ export async function getPokemon(name: string): Promise<IPokemonViewModel> {
   return {
     id: data.id,
     name: data.name,
-    image: data.sprites.other["official-artwork"].front_default,
+    image: data.sprites.other["showdown"].front_default, // pegar imagem animada (gif), antes pegavamos pela chave "official-artwork"
     type: data.types[0].type.name, // pegar o primeiro tipo
     height: data.height / 10, // decímetros para metros
     weight: data.weight / 10, // hectogramas para kg

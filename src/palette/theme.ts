@@ -1,9 +1,10 @@
 import { MD3LightTheme } from "react-native-paper";
+
 import { colors } from "./colors";
 
 export const theme = {
   ...MD3LightTheme,
-  roundness: 4,
+  roundness: 12,
   colors: {
     ...MD3LightTheme.colors,
     primary: colors.primary,
