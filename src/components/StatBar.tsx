@@ -25,11 +25,12 @@ export default StatBar;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 8,
+    marginVertical: 4,
   },
   text: {
     marginBottom: 4,
     fontSize: 14,
+    color: "#ffffffff",
   },
   bar: {
     height: 8,
