@@ -3,6 +3,7 @@ import { Button, Card, Text } from "react-native-paper";
 
 import { IPokemonViewModel, IStarterConfig } from "../types/game";
 import { capitalize, getTypeColor } from "../utils/pokemon";
+import { colors } from "../palette/colors";
 
 interface CardPokemonProps {
   pokemon: IPokemonViewModel;
@@ -29,16 +30,25 @@ export const CardPokemon = ({
       style={[
         styles.card,
         {
-          borderColor: getTypeColor(pokemon.type),
-          backgroundColor: starter.background
+          borderColor: starter.accent,
+          backgroundColor: starter.background,
         },
       ]}
     >
       <Card.Content>
-        <Image source={{ uri: pokemon.image }} style={styles.image} />
-
-        <Text variant="headlineSmall" style={[styles.name, {color: textColor}]}>
+        <Card.Cover style={styles.image} source={{ uri: pokemon.image }} />
+        <Text
+          variant="headlineLarge"
+          style={[styles.name, { color: textColor }]}
+        >
           {capitalize(pokemon.name)}
+        </Text>
+
+        <Text
+          variant="headlineSmall"
+          style={[styles.name, { color: getTypeColor(pokemon.type) }]}
+        >
+          {capitalize(pokemon.type)}
         </Text>
 
         <Text style={styles.info}>#{pokemon.id}</Text>
@@ -56,14 +66,14 @@ export const CardPokemon = ({
 
         {/* o botão só aparece quando onChoose for passado */}
         {onChoose && (
-          <Button mode="elevated" onPress={onChoose} style={styles.button}>
+          <Button mode="contained" onPress={onChoose} style={styles.button}>
             Escolher
           </Button>
         )}
       </Card.Content>
     </Card>
   );
-}
+};
 
 const styles = StyleSheet.create({
   card: {
@@ -72,8 +82,8 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 110,
-    height: 130,
+    width: 130,
+    height: 160,
     alignSelf: "center",
   },
 
@@ -85,9 +95,14 @@ const styles = StyleSheet.create({
   info: {
     textAlign: "center",
     marginTop: 4,
+    color: colors.textSecondary,
+    fontWeight: "bold",
+    fontFamily: "sans-serif",
   },
 
   button: {
     marginTop: 12,
+    backgroundColor: colors.secondary,
+    fontWeight: "900",
   },
 });

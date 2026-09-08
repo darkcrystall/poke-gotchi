@@ -1,8 +1,8 @@
-// cores so pro tema, as outras a gente usa pros pokemons (cards)
+// cores do tema
 export const colors = {
   primary: "#3761A8",
-  secondary: "#F4C430",
+  secondary: "#d0c25b",
 
-  text: "#cfb461",
-  textSecondary: "#6B7280",
+  text: "#c9b169",
+  textSecondary: "#698aa6",
 };
