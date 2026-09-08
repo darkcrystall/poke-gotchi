@@ -4,6 +4,7 @@ import { IPokemonViewModel, IStarterConfig, } from "../types/game";
 import { getPokemon } from "../services/pokeapi-service";
 import StatBar from "../components/StatBar";
 import ActionButton from "../components/ActionButton";
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 interface GameProps {
   starter: IStarterConfig;
@@ -25,6 +26,32 @@ const GamePage = ({
   const [message, setMessage] = useState(
     `Companheiro: ${starter.label}`
   );
+
+// pra salvar nivel/experiencia
+const pokeSalvo = async () => {
+  const dados = {
+    level,
+    experience,
+  };
+  await AsyncStorage.setItem(`@poke-gotchi:${starter.species}`, JSON.stringify(dados));
+
+  setMessage("Dados salvos com sucesso!");
+};
+//executa quando abre o gamestorage
+useEffect(() => {
+  const loadData = async () => { //funçao pra buscar os dados salvos 
+    const savedData = await AsyncStorage.getItem(`@poke-gotchi:${starter.species}`);// chave especifica do pokemon
+    if (savedData) { //se encontrar algo salvo
+      const { level, experience } = JSON.parse(savedData);//texto= objeto
+      setLevel(level); //coloca no estado do jogo
+      setExperience(experience);
+    }
+  };
+
+  loadData();
+}, []);
+
+
 
   useEffect(() => {
     getPokemon(starter.species)
@@ -285,6 +312,9 @@ return (
       >
         Trocar
       </Text>
+
+
+      
     </View>
 
     {/* APARELHO */}
@@ -298,7 +328,7 @@ return (
         <View style={styles.lightGreen} />
       </View>
 
-      {/* Tela do aparelho */}
+      {/* Tela do aparelho que chama o gif*/}
       <View style={styles.screen}>
         <Image
           source={{ uri: pokemon.image }}
@@ -306,7 +336,7 @@ return (
           resizeMode="contain"
         />
 
-        {/* Humor do Pokémon */}
+        {/* Humor do Pokémon / verificação */}
         <View style={styles.mood}>
           <Text style={styles.moodText}>
             Estou {mood()}!
@@ -345,7 +375,7 @@ return (
         Peso {pokemon.weight} kg
       </Text>
 
-      {/* Nível e experiência */}
+      {/* Nível e experiência  */}
       <View style={styles.levelRow}>
         <Text style={styles.level}>
           NÍVEL {level}
@@ -413,7 +443,7 @@ return (
       />
     </View>
 
-    {/* MENSAGEM */}
+    {/* MENSAGEM atual */}
     <View style={styles.message}>
       <Text style={styles.messageText}>
         {message}
@@ -427,6 +457,7 @@ return (
       <Text style={styles.sectionTitle}>
         O QUE VAMOS FAZER?
       </Text>
+      
 
       {/* Primeira linha de botões */}
       <View style={styles.actionRow}>
@@ -483,7 +514,17 @@ return (
         onPress={train}
         color="#75a5e9ff"
       />
+      {/* Botão salvar */}
+      <ActionButton
+        icon="arm-flex"
+        label="SALVAR"
+        onPress={pokeSalvo}
+        color="#75a5e9ff"
+      />
     </View>
+
+
+
 
     {/* RODAPÉ */}
     <View style={styles.footer}>

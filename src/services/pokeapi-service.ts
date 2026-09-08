@@ -15,10 +15,8 @@ export async function getPokemon(
       `Erro ao buscar Pokémon: ${response.statusText}`
     );
   }
-
   // Permite acessar os dados do Pokémon.
   const data = await response.json();
-
   // Retorna somente as informações que o nosso jogo precisa.
   return {
 
@@ -27,7 +25,7 @@ export async function getPokemon(
 
     // Nome do Pokémon
     name: data.name,
-
+    
     // Imagem animada do Pokémon
     image:
       data.sprites.versions["generation-v"]["black-white"].animated.front_default,
